@@ -4,14 +4,14 @@ const EventoSchema = Schema({
     
     title: {
         type: String,
-        required: true,
+        required: true
     },
     notes: {
-        type: String
+        type: String,
     },
     start: {
         type: Date,
-        required: true,
+        required: true
     },
     end: {
         type: Date,
@@ -31,4 +31,4 @@ EventoSchema.method('toJSON', function() {
     return object;
 });
 
-module.exports = model( 'Evento', EventoSchema );
+module.exports = model('Evento', EventoSchema );

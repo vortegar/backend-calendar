@@ -11,13 +11,13 @@ const { isDate } = require("../helpers/isDate");
 
 const router = Router();
 
-//Todas las peticiones tienen que pasar por la validación del JWT
+// Todas tienes que pasar por la validación del JWT
 router.use( validarJWT );
 
-//Obtener eventos
+// Obtener eventos
 router.get('/', getEventos );
 
-//Crear nuevo evento
+// Crear un nuevo evento
 router.post(
     '/',
     [
@@ -28,11 +28,19 @@ router.post(
     ], 
     CrearEvento );
 
-//Actualizar evento
-router.put('/:id', actualizaEvento );
+// Actualizar Evento
+router.put(
+    '/:id',
+    [
+        check('title','El titulo es obligatorio').not().isEmpty(),
+        check('start','Fecha de inicio es obligatoria').custom( isDate ),
+        check('end','Fecha de finalización es obligatoria').custom( isDate ),
+        validarCampos
+    ],
+    actualizaEvento
+    );
 
-//Borrar evento
+// Borrar evento
 router.delete('/:id', eliminarEvento );
-
 
 module.exports = router;
